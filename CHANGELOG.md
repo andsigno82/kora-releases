@@ -6,6 +6,18 @@ Format follows [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [1.4.9] - 2026-07-30
+
+### Added
+- Addendum operativo come overlay sopra la chat con padding dinamico misurato tramite ResizeObserver; MessageScrollerButton spostato sopra l'overlay
+- Riepilogo verde con check "N/N completed" nell'header dell'addendum quando tutti i Todo sono completati
+
+### Changed
+- Badge "Completed" rimossi dalle singole righe Todo completate — il check e il testo barrato sono sufficienti come indicazione visiva
+- Rimossa la riga Close con divider e padding dall'addendum — il riepilogo "N/N completed" funge da controllo di collapse
+
+---
+
 ## [1.4.8] - 2026-07-30
 
 ### Added
