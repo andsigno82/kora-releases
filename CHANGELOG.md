@@ -6,6 +6,57 @@ Format follows [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [1.4.8] - 2026-07-30
+
+### Added
+- Ridisegnate le righe sessione strette con azioni su riga separata sotto 320px — lo stato compatto del ResizeObserver preserva titolo e metadati non compressi
+
+### Changed
+- Timestamp dei messaggi utente formattati in dd/MM/yyyy HH:mm con locale italiana — timestamp dei messaggi di sistema rimasti invariati
+
+---
+
+## [1.4.6] - 2026-07-29
+
+### Added
+- Riconoscimento e normalizzazione automatica della temperatura minima a 1.0 per tutti i modelli della famiglia Kimi, indipendentemente dal provider
+
+---
+
+## [1.4.3] - 2026-07-29
+
+### Added
+- Discovery dinamico dei modelli ByteDance ModelArk con persistenza catalogo, toggle per-modello e Test Connection live nelle impostazioni provider
+
+### Fixed
+- Skill attive di sessione ora visibili nel composer dopo l'invio e dopo remount del pannello, con possibilità di rimozione singola (X) o massiva (Clear all) per i turni successivi
+- Aggiunta di una nuova skill non esclude più quelle già attive dal sistema prompt del turno corrente
+- Contatore turni ripristinato dal valore persisted al remount, evitando degradazione STE in eco/balanced su riapertura sessione
+- Lettura metadata modelli custom dai provider built-in
+
+---
+
+## [1.4.2] - 2026-07-28
+
+### Added
+- Inline fuzzy @ mentions: Tab sfoglia le directory, Enter conferma, il path raw resta nel testo del messaggio mentre la bolla utente mostra un chip compatto richiudibile
+- Guida fissa Tab to browse · Enter to confirm sopra i risultati del menù a tendina
+- Hover sul chip mention mostra il path completo in un tooltip; click ripristina la mention nel composer e riapre la ricerca fuzzy
+
+### Fixed
+- Percorsi con spazi ora quotati con doppi apici nel composer per evitare tokenizzazione errata
+- Contesto di browsing stale cancellato alla pressione di Escape o cambio manuale della mention
+- Percorsi remoti ripristinati al corretto root remoto invece del path assoluto locale
+
+---
+
+## [1.4.1] - 2026-07-28
+
+### Fixed
+- Estesa la ricerca fuzzy delle mention a tutte le folder locali con fan-out parallelo e guardia contro risultati obsoleti, preservato il fallback legacy su singola cartella
+
+---
+
 ## [1.4.0] - 2026-07-27
 
 ### Added
