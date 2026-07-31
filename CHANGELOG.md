@@ -6,6 +6,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [1.4.12] - 2026-07-31
+
+### Changed
+- Remove redundant status badges from todo rows — icons and styling keep task state clear
+
+### Fixed
+- Publish GitHub releases even when version-specific public notes are missing — safe English fallback, non-blocking
+
+---
+
 ## [1.4.11] - 2026-07-31
 
 ### Added
