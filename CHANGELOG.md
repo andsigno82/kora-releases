@@ -6,6 +6,17 @@ Format follows [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [1.4.11] - 2026-07-31
+
+### Added
+- Controlli operativi per agente e per todo nell'addendum: stop del singolo agente, stop all, clear completati/falliti e clear all, con icone e tooltip dedicati
+
+### Changed
+- Send-now della coda reso atomico e session-safe — il messaggio viene rimosso dallo store autorevole prima dell'interruzione del turno e il dispatch resta sincrono per evitare consegne cross-session
+- Cleanup del turno precedente (todo completati e flag auto-spawn) spostato all'avvio effettivo del provider — messaggi solo accodati o rifiutati non alterano più lo stato del turno in corso
+
+---
+
 ## [1.4.9] - 2026-07-30
 
 ### Added
