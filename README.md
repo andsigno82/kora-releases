@@ -2,6 +2,16 @@
 
 Public release channel for [Kora](https://kora-ai.download) — the AI assistant desktop app for macOS.
 
+## What's new
+
+- **Queue automation** — advance queued messages automatically after each completed turn
+- **Open response canvas** — show model answers on an open canvas for a cleaner reading experience
+- **Cleaner user prompts** — redesign the prompt with a clearer full-width layout and a single timestamp in the footer
+- **Compact inline file references** — render file paths as compact chips inside chat messages
+- **Automatic context optimization** — adapt optimization to the active model and conversation size
+
+Full history in [CHANGELOG.md](CHANGELOG.md).
+
 This repository hosts:
 
 - **`latest.json`** — Tauri updater manifest (auto-update endpoint)
