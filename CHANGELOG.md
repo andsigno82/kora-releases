@@ -1,8 +1,36 @@
 # Changelog
 
-All notable public changes to Kora are documented in this file.
+---
 
-Format follows [Keep a Changelog](https://keepachangelog.com/).
+## [1.5.0] - 2026-08-05
+
+### Added
+- Add persistent autonomous Goal Mode with bounded post-turn evaluation and safe continuation
+- Add the master toolbar to the native title bar
+- Record per-request context composition across messages, prompts, tools, skills, and metadata
+
+### Changed
+- Add inline /ask, /plan, /debug, and /build commands with immediate mode switching
+- Represent /goal as a removable composer chip while preserving its condition text
+- Show context composition and weighted cache hit rates in the context indicator at every viewport width
+
+### Fixed
+- Keep shell, scripts, Git, system tools, and relative paths local by default unless a remote project directory is explicit
+
+---
+
+## [1.4.13] - 2026-08-03
+
+### Added
+- Add working-tree diffs to the editor file toggle and GitPanel compact view with a virtual uncommitted node
+- Cache provider capability metadata with TTL and stateless resolver fallback
+
+### Changed
+- Isolate editor file identity per session so paths, diffs, and pending edits never collide across sessions
+- Store queued turns as versioned skill references and invalidate session skills on clear or removal
+
+### Fixed
+- Pair tool-call and tool-result chronologically to prevent provider 400s from orphaned persisted results
 
 ---
 
