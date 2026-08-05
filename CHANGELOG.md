@@ -2,6 +2,16 @@
 
 ---
 
+## [1.5.2] - 2026-08-06
+
+### Fixed
+- Use provider-reported final-step usage as the only persisted context measurement, fencing stale turns across session, payload, and telemetry stores
+- Preserve open todos when steering queued messages so the replacement turn reconciles work instead of marking it failed
+- Stop repeated todo continuation summaries by continuing the original task without interim recaps and halting on no-progress iterations
+- Route manual compaction through the canonical generation-parameter builder, preserving temperature precedence and stripping unsupported empty values
+
+---
+
 ## [1.5.0] - 2026-08-05
 
 ### Added
