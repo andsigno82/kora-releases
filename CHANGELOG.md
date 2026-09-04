@@ -1,5 +1,61 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+- Configurable platform session headers for supported HTTP providers
+- Concise progress updates during long-running tool workflows
+
+### Changed
+- Context details open on hover and can still be pinned with a click
+- Subagents have more room to investigate and reserve their final step for a useful summary
+
+### Fixed
+- Keep CLI queue handoffs attached to the correct workflow
+- Keep background subagents inside the parent project's folders and label step-limited results as partial
+
+---
+
+## [1.6.0] - 2026-09-03
+
+### Added
+- Control an active Kora session from a phone browser through QR-based Mobile Pairing
+- Switch sessions, provider, model, and execution mode from the remote view
+- Mirror streaming replies and context usage between desktop and phone
+- Use Devin as a CLI coding provider through ACP, with reasoning visibility and slash commands
+- Curate discovered OpenCode and Devin models in Settings
+
+### Changed
+- Replace fixed duration caps with sustained-use watchdogs for long-running work
+- Keep disabled CLI models out of the model selector
+
+### Fixed
+- Keep large tool results, file listings, and remote payloads within safe context and relay limits
+- Preserve assistant text, tool results, and token measurements across CLI provider turns
+- Recover Devin sessions when the underlying harness session is unavailable
+
+### Security
+- Authenticate desktop realtime relay joins with the configured bearer token
+
+---
+
+## [1.5.4] - 2026-08-14
+
+### Fixed
+- Restore native desktop HTTP requests with bounded structured responses
+- Keep full tool results in the interface while limiting the copy sent back to providers
+- Preserve context measurements and streaming animation during large responses
+
+---
+
+## [1.5.3] - 2026-08-07
+
+### Added
+- Adopt the standard questionnaire interface for ask-user prompts
+
+### Changed
+- Upgrade the desktop client to React 19
+
 ---
 
 ## [1.5.2] - 2026-08-06
@@ -8,6 +64,7 @@
 - Use provider-reported final-step usage as the only persisted context measurement, fencing stale turns across session, payload, and telemetry stores
 - Preserve open todos when steering queued messages so the replacement turn reconciles work instead of marking it failed
 - Stop repeated todo continuation summaries by continuing the original task without interim recaps and halting on no-progress iterations
+- Keep subagent wait and lifecycle terminal-safe, preserving partial results across timeout and restart recovery
 - Route manual compaction through the canonical generation-parameter builder, preserving temperature precedence and stripping unsupported empty values
 
 ---
@@ -20,8 +77,8 @@
 - Record per-request context composition across messages, prompts, tools, skills, and metadata
 
 ### Changed
-- Add inline /ask, /plan, /debug, and /build commands with immediate mode switching
-- Represent /goal as a removable composer chip while preserving its condition text
+- Add inline `/ask`, `/plan`, `/debug`, and `/build` commands with immediate mode switching
+- Represent `/goal` as a removable composer chip while preserving its condition text
 - Show context composition and weighted cache hit rates in the context indicator at every viewport width
 
 ### Fixed
