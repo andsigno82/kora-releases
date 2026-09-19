@@ -1,38 +1,137 @@
 # Changelog
 
-## [Unreleased]
+---
+
+## [1.6.7] - 2026-09-19
 
 ### Added
-- Configurable platform session headers for supported HTTP providers
-- Concise progress updates during long-running tool workflows
+- Search sessions by title in the sidebar and label the status-dot filter bar
+- Make auto-compaction engine-first with model-generated summaries on every path, mode-aware actionable margins (eco/balanced/quality), and extractive notes only as a marked fallback
+- Make the root-scoped workspace snapshot the sole authority for projects, folders, and sessions, with validated envelopes, rotated backups, revision-checked saves, and a boot gate for conflicts
 
 ### Changed
-- Context details open on hover and can still be pinned with a click
-- Subagents have more room to investigate and reserve their final step for a useful summary
+- Pin com.kora.desktop as the explicit release identity so release and dev builds stay isolated without config rewriting
+- Mount collapsed reasoning and grouped tool rows only on first open, keeping unopened disclosure content out of the DOM
 
 ### Fixed
-- Keep CLI queue handoffs attached to the correct workflow
-- Keep background subagents inside the parent project's folders and label step-limited results as partial
+- Break goal-mode summary loops with terminal unverifiable/blocked verdicts and no-progress stall detection on evidence-free evaluations
+- Clamp oversized persisted tool-result payloads on transcript load and self-heal the session file on the next save
+- Suspend the deploy suite TUI while the local installer owns the terminal, ending terminal corruption after local installs
+
+---
+
+## [1.6.6] - 2026-09-18
+
+### Added
+- Mirror desktop-queued turns on the mobile remote with remove, send-now, and clear controls
+- Match the mobile remote sidebar exactly to desktop project and session visibility
+- Filter sessions by status dot in the sidebar
+
+### Changed
+- Bound the message cache and debounce workspace mirror writes to sustain long sessions
+- Give the goal evaluator full evidence with uncapped output
+
+### Fixed
+- Enforce one storage root per build profile with a root-scoped single-instance lock so concurrent instances can no longer overwrite the shared workspace
+- Flush the workspace mirror on page hide so the latest state survives quick quits
+- Merge windowed saves into session transcripts instead of overwriting the head, stopping silent data loss on long sessions
+- Heal sessions orphaned by deleted custom providers back into the workspace
+- Re-attach orphaned sessions to the first same-provider model when their model disappears
+- Keep disabled dynamic models listed as off switches on catalog refresh instead of an empty management list
+- Stop refresh from re-enabling disabled models in the model selector
+- Repair orphaned tool-call/tool-result pairs before provider calls
+- Drop redundant asking cards, duplicated turn text, and stale-step fallback bubbles
+- Suppress the stale cancelled CLI terminal after a steer and clear CLI handles by turn identity
+- Surface raw provider error text in empty-response classification
+- Propagate executor rejection messages verbatim so the model can self-correct
+- Resolve script interpreters through the expanded PATH and pass it to child processes
+- Keep the context ring actionable and preserve compaction pressure across turn-start invalidation
+- Let the goal evaluator survive reasoning models and show the real failure cause
+- Keep the todo addendum closable on terminal lists with failures and halve its max height
+- Anchor picked-up todos at the top of the addendum and key auto-scroll reset on task identity
+
+---
+
+## [1.6.2] - 2026-09-07
+
+### Added
+- Add configurable platform session headers with static values, per-session UUIDs, and session identifiers across supported HTTP providers
+- Add concise progress narration for long-running tool workflows when the agent would otherwise remain silent
+- Rewrite Cloud Sync around the device-ownership model — one originating device per session, deferred caches on other devices, and no silent forks
+- Add a real Cloud Sync on/off switch — "off" finally means off
+- Stamp sessions with their originating device and badge cloud-owned sessions in the sidebar
+- Add a v3 full-backup config payload with per-category merge and continuous config push
+- Surface skipped sync sessions with size and retry actions, and add full cloud backup download
+- Propagate session deletions across devices and clean up existing fork duplicates
+- Switch STE optimization mode from the phone remote with live two-way sync
+- Surface Devin plan updates as todo snapshots in the app
+
+### Changed
+- Open compact context details on hover while keeping click-to-pin behavior
+- Move the STE optimization mode pill from the sidebar footer to the composer, beside the execution mode pill
+- Unify code highlighting on a shared shiki engine tokenizing in a Web worker, covering streaming, the markdown viewer, and syntax blocks
+- Remove the alarming amber/red thinking meter now that narration covers silence
+- Carry the goal condition, app todo view, and turn-start reconciliation into CLI harness turns
+
+### Fixed
+- Preserve stable workflow identity across CLI queue handoffs so subsequent turns are not left blocked
+- Keep Cloud Sync setup, join, and config push working through keychain failures without shipping degraded backups
+- Create the sessions directory before the first cloud pull write on fresh machines
+- Fork cross-device sessions only on real divergence, ending the duplicate storm
+- Make "delete all sync data" clear the workspace list, not just files and server rows
+- Keep the sync indicator from re-greening after Cloud Sync is turned off, wiped, or restarted
+- Report Cloud Sync status from local truth and run a best-effort final sync on quit
+- Guard markdown rendering against crashes on very large documents
+- Make the OTA installer work on Macs without Command Line Tools
+- Show an actionable message when the local context safety guard blocks a provider request
+- Keep the previous context usage visible on the phone while a turn is in flight
+- Raise the remote per-message text cap to 64K so long CLI reports are not clipped
 
 ---
 
 ## [1.6.0] - 2026-09-03
 
 ### Added
-- Control an active Kora session from a phone browser through QR-based Mobile Pairing
-- Switch sessions, provider, model, and execution mode from the remote view
-- Mirror streaming replies and context usage between desktop and phone
-- Use Devin as a CLI coding provider through ACP, with reasoning visibility and slash commands
-- Curate discovered OpenCode and Devin models in Settings
+- Add QR-based realtime mobile pairing with a responsive browser remote and six-hour room recovery
+- Add live mirroring of provider, model, mode, and context usage changes from the desktop to the remote view
+- Add bidirectional execution mode switching between the remote composer and the desktop session
+- Add a context usage ring to the remote header mirroring the desktop indicator
+- Add remote session switching, new-session actions, and provider/model selection
+- Add mobile transcript navigation with global turn numbering and on-demand bounded history
+- Add a reasoning-safe mobile stream projection that keeps native reasoning out of the remote transcript
+- Add automatic remote bundle refresh through QR URL versioning
+- Add Devin as a CLI coding provider driven over the Agent Client Protocol with reasoning visibility
+- Add Devin slash commands to the skill palette, curated from the harness-advertised command set
+- Add per-model context windows and output limits to the Devin dynamic catalog
+- Add token and context metering for CLI provider turns through the shared metering path
+- Add curated CLI Discovered Models management to the settings tab
+- Add a fulltext filter to the provider model toggles
+- Add structured slash-command support for OpenCode
 
 ### Changed
-- Replace fixed duration caps with sustained-use watchdogs for long-running work
+- Upgrade Streamdown to 2.6.0 and adopt its official serialized staged-reveal implementation
+- Keep the relay URL fixed to the production relay in release builds, with LAN autodiscovery in development
 - Keep disabled CLI models out of the model selector
+- Align DESKTOP prompt sheets with the active provider lineup and current Git Workspace Panel terminology
+- Drop the redundant Auto prefix from the mode pill label
 
 ### Fixed
-- Keep large tool results, file listings, and remote payloads within safe context and relay limits
-- Preserve assistant text, tool results, and token measurements across CLI provider turns
-- Recover Devin sessions when the underlying harness session is unavailable
+- Preserve staged-reveal animation through the 600 ms drain grace before swapping to completed rendering
+- Preserve assistant answer text after trusted native reasoning boundaries
+- Show configured custom provider names in the mobile remote view
+- Restore sharp rendering for the QR pairing dialog
+- Use stable per-stream message identifiers to prevent remote assistant bubbles from being overwritten
+- Mirror the desktop session list one-to-one in the remote session drawer
+- Keep remote traffic within the relay payload limit when large model catalogs are configured
+- Recover Devin conversations transparently when the harness session is missing on resume
+- Apply model switches made mid-conversation on Devin sessions
+- Report Devin token usage correctly instead of recording zero measurements
+- Render Devin file edits as inline diffs and keep tool results retained
+- Skip Kora-side compaction on CLI sessions whose harness manages its own context
+- Keep CLI tool identities out of HTTP provider replays
+- Stop recursive file listings and batch file reads from flooding the context
+- Preserve tool-only turns that end in stream errors
+- Trim oversized payloads before applying the local hard block
 
 ### Security
 - Authenticate desktop realtime relay joins with the configured bearer token
@@ -42,19 +141,9 @@
 ## [1.5.4] - 2026-08-14
 
 ### Fixed
-- Restore native desktop HTTP requests with bounded structured responses
-- Keep full tool results in the interface while limiting the copy sent back to providers
-- Preserve context measurements and streaming animation during large responses
-
----
-
-## [1.5.3] - 2026-08-07
-
-### Added
-- Adopt the standard questionnaire interface for ask-user prompts
-
-### Changed
-- Upgrade the desktop client to React 19
+- Apply emergency payload compaction when it reduces bytes even if token savings cannot be estimated
+- Keep stale context usage visible after a model or provider switch instead of hiding the context indicator
+- Restore character-level streaming animation for short responses with a non-animated fallback for large messages
 
 ---
 
@@ -64,7 +153,6 @@
 - Use provider-reported final-step usage as the only persisted context measurement, fencing stale turns across session, payload, and telemetry stores
 - Preserve open todos when steering queued messages so the replacement turn reconciles work instead of marking it failed
 - Stop repeated todo continuation summaries by continuing the original task without interim recaps and halting on no-progress iterations
-- Keep subagent wait and lifecycle terminal-safe, preserving partial results across timeout and restart recovery
 - Route manual compaction through the canonical generation-parameter builder, preserving temperature precedence and stripping unsupported empty values
 
 ---
@@ -77,8 +165,8 @@
 - Record per-request context composition across messages, prompts, tools, skills, and metadata
 
 ### Changed
-- Add inline `/ask`, `/plan`, `/debug`, and `/build` commands with immediate mode switching
-- Represent `/goal` as a removable composer chip while preserving its condition text
+- Add inline /ask, /plan, /debug, and /build commands with immediate mode switching
+- Represent /goal as a removable composer chip while preserving its condition text
 - Show context composition and weighted cache hit rates in the context indicator at every viewport width
 
 ### Fixed
@@ -91,10 +179,6 @@
 ### Added
 - Add working-tree diffs to the editor file toggle and GitPanel compact view with a virtual uncommitted node
 - Cache provider capability metadata with TTL and stateless resolver fallback
-
-### Changed
-- Isolate editor file identity per session so paths, diffs, and pending edits never collide across sessions
-- Store queued turns as versioned skill references and invalidate session skills on clear or removal
 
 ### Fixed
 - Pair tool-call and tool-result chronologically to prevent provider 400s from orphaned persisted results
@@ -190,14 +274,6 @@
 ### Added
 - **Queue automation** — advance queued messages automatically after each completed turn
 
-### Changed
-- **Cleaner user prompts** — redesign the prompt with a clearer full-width layout and a single timestamp in the footer
-- **Open response canvas** — show model answers on an open canvas for a cleaner reading experience
-- **Accessible long paste** — make long pasted messages easier to expand with the keyboard
-- **Theme-aware message links** — use theme-aware colors for links in user messages
-- **Turn navigation controls** — refresh turn navigation controls for a clearer visual hierarchy
-- **Compact queued message row layout** — tighten queue row spacing and align drag preview with message bounds
-
 ---
 
 ## [1.3.5] - 2026-07-27
@@ -222,9 +298,10 @@
 - **Token engine auto mode alignment** — context-aware auto mode correctly falls back when context window is insufficient
 - **GitHub auth check** — use gh repo view instead of gh auth status --repo for reliable auth verification
 
-### Performance
+### Changed
 - **Defer markdown rendering until stream completion** — avoid per-token re-render during active streaming; reduces jank in long responses
 - **Stream markdown in frame-aligned blocks** — batch markdown updates to animation frames for smoother rendering
+- **Inline context window builder** — remove indirection layer for context window calculations
 
 ---
 
@@ -234,8 +311,9 @@
 - Normalize attachment chips and add collapsible file activity summary
 - Selective clear of completed or failed todo items with human-readable labels
 
-### Performance
+### Changed
 - Lazy-load heavy component chunks
+- Replace busy-wait loop with reactive effect-based dispatch
 
 ---
 
@@ -244,9 +322,10 @@
 ### Fixed
 - Remove misleading "local" label from AI diagnostics (applies to every provider, not just local)
 
-### Performance
+### Changed
 - Replace scroll-intent state with ref callback to avoid re-render on wheel
 - Early return for inactive sessions to avoid hidden tree reconciliation
+- Add exhaustiveness guards to switch statements across 4 modules
 
 ---
 
@@ -255,9 +334,10 @@
 ### Fixed
 - Remove misleading "local" label from AI diagnostics (applies to every provider, not just local)
 
-### Performance
+### Changed
 - Replace scroll-intent state with ref callback to avoid re-render on wheel
 - Early return for inactive sessions to avoid hidden tree reconciliation
+- Add exhaustiveness guards to switch statements across 4 modules
 
 ---
 
@@ -325,6 +405,9 @@
 ### Fixed
 - Bash 3.2 compatible empty array expansion
 
+### Changed
+- Pause Windows from release matrix and manifest
+
 ---
 
 ## [1.0.7] - 2026-07-13
@@ -333,6 +416,9 @@
 - 3-choice update modal with dismiss checkbox and progress
 - Forward phase, progress, error and 3-choice actions
 - Gate full-auto updater on signed GitHub release
+
+### Changed
+- Split publish from preview builds, ad-hoc + minisign OTA
 
 ---
 
@@ -377,6 +463,12 @@
 - Settings migration panic on dev build startup
 - Preserve release migration and v7 text deltas
 
+### Changed
+- Remove over-engineering across the entire codebase (~1,840 lines)
+- Render operations inline in addendum bar
+- Reduce over-engineering in stores, streaming, and engine
+- Improve markdown table readability
+
 ---
 
 ## [0.21.2] - 2026-07-03
@@ -390,6 +482,9 @@
 - Track previously untracked required source files
 - Restore session drag-and-drop and harden sidebar DnD UX
 - Reposition sidebar tooltips to 'right' and theme-tint agent avatar in dark mode
+
+### Changed
+- Remove provider icon sizing indirection
 
 ---
 
@@ -405,6 +500,9 @@
 - Bottom padding to search input in dropdown
 - Scroll to bottom on submit, simplify scroll architecture
 - Preserve model metadata in reasoning-first assistant messages
+
+### Changed
+- Improve chat scroll behavior and remove dead remote explorer code
 
 ---
 
@@ -469,6 +567,9 @@
 - Suppress false-positive integrity warning in plan mode
 - Theme radio generic — supports kora-purple (and future themes)
 
+### Changed
+- UI component styling and asset updates
+
 ---
 
 ## [0.14.4] - 2026-06-15
@@ -480,6 +581,13 @@
 ### Fixed
 - Resolve queue race condition, double cursor, and compaction UX
 - Queue/todo/turn integration — dead code, memory leak, UX polish
+
+---
+
+## [0.13.2] - 2026-06-11
+
+### Changed
+- Clean up token bar compact button and status indicators
 
 ---
 
@@ -498,6 +606,12 @@
 - Conservative byte estimate (round up) + adversarial verification
 - Proactive occupancy on reload + cleaner label
 - Multiple bug fixes and session rename feature
+
+### Changed
+- Split 4 oversized system files into modules (parallel, API-preserving)
+- Extract presentational subcomponents 2270 → 2130
+- Extract pure helpers (interruption note, skill degradation, auto-compact predicate)
+- Remove Factory Droid provider (rename shared CLI infra to cli_*)
 
 ---
 
@@ -544,8 +658,14 @@
 - Prevent UI collapse at 50-message threshold in virtualized view
 - Scope proactive auto-compact by session id and add failure cooldown
 
-### Performance
+### Changed
 - Inject full project rules only on the first turn (compact outline after)
+- Remove deprecated token dashboard and chart components
+- Extract SettingsTab types, add file explorer store
+- Add out-of-band compaction state primitive (1/3)
+- Wire out-of-band state as authoritative (2/3)
+- Remove 5 disabled providers (moonshot, minimax, qwen, zhipu, xiaomi)
+- Session context number = exact provider usage (drop conservative-max)
 
 ---
 
@@ -586,6 +706,9 @@
 - Add third-layer defense-in-depth against turn-chain re-creation
 - Remove reasoning breakthrough detection and never promote reasoning to text
 
+### Changed
+- Deprecate community providers and overhaul settings UI
+
 ---
 
 ## [0.9.6] - 2026-05-17
@@ -602,26 +725,9 @@
 - Suggest Prompt button to agent create/edit modal
 - Reasoning Guard (CoT Meter) + accumulated fixes
 
-### Fixed
-- Stall watchdog abort stream, integrity validation, retry logic + PTC security
-- Post-critical-review bug fixes (6 bugs + test suite)
-- Support multiple execution-mode listeners for Dockview multi-session
-- Anchor chat panels to empty-state to preserve left-column position
-- Move processing-indicator above avatar and ensure cleanup on stream end
-- Smooth scroll on FAB click
-- Eliminate FAB flash during smooth scroll + add fade toggle
-- Post-processing automatico per spacing su thinking chunks
-- Timeout 5min, step limit rimosso, prompt summary, fallback summary
-- Robustness mitigations for model heterogeneity + default build mode
-- Recovery hint no-op + test alignment
-- Fallback summary when model executes tools but generates no text
-- Resolve 4 low-severity findings from critical review
-- Left-align edit-decision pills to match tool chips
-- Switch skill injection to plural form for multi-skill awareness
-- @ autocomplete follows the current root of DirectoryTree
-- Remove broken orchestration tool and fix regression cascade
-- Align EditDecisionBadge with tool card content via
-- Resolve vision capability for custom providers and CLI providers
+### Changed
+- Reverse session-shimmer direction to left-to-right
+- Square FAB positioned above input area with smooth fade
 
 ---
 
@@ -641,22 +747,10 @@
 - Comprime testo incollato con badge + migliora rendering compaction
 - "Set as root" context menu + preserve expanded state on refresh
 
-### Fixed
-- Prevent right-click from opening files in editor
-- S03 embeddings — remove X-Kora-System, accept any Kora key
-- Increase timeout to 120s and reduce batch to 8
-- Resolve 0KB cloud sync — add first-sync bulk upload and align server protocol
-- Use default_headers for Authorization and add debug logging
-- Trigger debounced sync_now after marking session dirty
-- Use eprintln! instead of log::info! for diagnostic output
-- Add required k parameter to vec0 KNN queries, suppress dead_code warning
-- Bring thinking block chevron closer to text
-- Reload passphrase from keychain if not in memory
-- Improve UI consistency and fix stall watchdog false positive
-- Migliora gestione provider custom e error handling workflow
-- Wire RemoteFileExplorerPanel into FileExplorerContainer sections
-- Support ~ paths and global project scan in remote file explorer
-- Auto-refresh file explorer after AI operations + fix end-of-turn summary
+### Changed
+- Remove model and dimensions from embeddings request
+- Replace dead plan mode types with sequentialthinking static tool
+- Harden engine, fix deadlock, improve hybrid search UX
 
 ---
 
@@ -763,3 +857,16 @@
 - Resolve custom model IDs + summarise everything past the marker
 - Dedup defense for re-emitted identical questions
 - Add runner.os guard to platform-specific workflow steps
+
+### Changed
+- Remove deprecated AppRouter + DocView outline
+- Remove dead workspace tool & provision docs/ prompt
+- Remove two obsolete data and index files
+- Lift and stabilise production custom instructions
+- Eliminate date-fns, lodash, papaparse, recharts deps
+- Remove sign-in fallback page component
+- Move TooltipButton into generic component directory
+- Remove context injection from chat panels and dashboard
+- Remove Qdrant settings from UI tabs
+- Remove ai-agents-sdk/provider dependency
+- Remove version list component from updater tab
