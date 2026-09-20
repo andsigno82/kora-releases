@@ -2,6 +2,16 @@
 
 ---
 
+## [1.6.8] - 2026-09-20
+
+### Added
+- Open external markdown links in the OS browser via Cmd/Ctrl+click
+
+### Changed
+- Render all markdown through Streamdown's official path so streaming and completed passes share a single code-block renderer
+
+---
+
 ## [1.6.7] - 2026-09-19
 
 ### Added
