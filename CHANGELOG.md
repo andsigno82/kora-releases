@@ -2,6 +2,18 @@
 
 ---
 
+## [1.6.9] - 2026-09-21
+
+### Added
+- Filter disk recovery candidates by title, project, or session ID in the recovery dialog
+
+### Changed
+- Keep long reasoning streams fluid with append-only incremental formatting and a bounded live step window that never truncates text
+- Derive lazy-visible message indexes from suffix offsets instead of scanning the message list on every render
+- Unmount disclosure content on close so collapsed reasoning and tool sections release their DOM
+
+---
+
 ## [1.6.8] - 2026-09-20
 
 ### Added
