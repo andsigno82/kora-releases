@@ -2,6 +2,29 @@
 
 ---
 
+## [1.7.0] - 2026-09-22
+
+### Added
+- Add the Claude Code CLI provider — one headless claude -p subprocess per turn with multi-turn resume, thinking/tool events, and Kora execution modes mapped to CLI permission modes
+- Support multiple Claude Code accounts by scanning isolated ~/.claude* config dirs, with cross-dir session-resume recovery when a UUID belongs to another account
+- Advertise the live Claude slash-command list from system.init in the palette instead of a curated fallback that drifts
+- Turn "#" in the composer into a same-project session mention picker that resolves to peer-message directives at submit time
+- Auto-launch queued peer messages on idle sessions and relay the target session's reply back to the sender without reply loops
+- Recover mobile relay pairing resiliently — capped reconnect backoff, zombie-socket probes, wake-on-visible reconnects, and bounded pending queues
+- Prevent system sleep while mobile pairing is active via an idempotent OS keepawake guard released on stop or exit
+
+### Changed
+- Unify tool-approval decisions in a single policy — telegram denials first, mode-driven auto-approve for build and debug, one classification point for every tool call
+
+### Fixed
+- Apply mid-turn execution-mode switches to the running permission gate so "Switch to Build & Allow" stops re-opening prompts on every destructive call
+- Make the telegram tool denial unconditional — build, debug, and plan sessions previously executed destructive calls anyway
+- Deliver parked peer messages without poisoning idle sessions with bogus "interrupted" system notes from stale interrupt machinery
+- Keep sessions with pending peer replies mounted in the background so parked messages drain even when their chat tab is closed
+- Keep Cargo.toml's crate version synchronized with app version bumps, ending the drift that left the crate at 0.20.1
+
+---
+
 ## [1.6.9] - 2026-09-21
 
 ### Added
