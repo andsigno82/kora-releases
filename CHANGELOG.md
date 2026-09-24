@@ -2,6 +2,20 @@
 
 ---
 
+## [1.7.2] - 2026-09-24
+
+### Added
+- Collapse model-selector provider groups behind a chevron toggle, starting collapsed above five models with search bypass
+
+### Fixed
+- Stop the local step guard from hard-blocking turns on estimated context pressure — reduce by pruning messages and defer to the provider's overflow retry
+- Scale default payload caps by model context window so large-context sessions no longer hit the fixed 2 MB preflight block
+- Drain parked peer messages regardless of agent id so idle target sessions never leave the queued head invisible
+- Keep the last three turns mounted and auto-expand underfull transcripts so older history stays reachable via scroll-up
+- Snap the file-explorer width back on any non-explorer panel change, not just editor-class panels
+
+---
+
 ## [1.7.0] - 2026-09-22
 
 ### Added
