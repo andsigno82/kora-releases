@@ -2,6 +2,30 @@
 
 ---
 
+## [1.7.3] - 2026-10-05
+
+### Added
+- Add Fusion, a persistent lead/sidekick model pairing: the delegate tool runs a bounded sidekick turn that keeps its own context across delegations and restarts
+- Surface Fusion in the composer with a sidekick picker pill, a busy indicator, and a compact delegation report card
+- Gate Fusion behind a premium enable flag in Settings
+
+### Changed
+- Gate sync and mobile pairing on the server's premium entitlement instead of treating any valid kor_* key as proof of subscription
+- Nudge the lead prompt toward delegation when a sidekick is bound
+- Ship the Windows channel as an installer-only NSIS release and publish the OTA windows-x86_64 entry only when a signature exists
+
+### Fixed
+- Hide CLI providers whose binary is missing from the model selector instead of showing ghost entries
+- Open settings with Cmd/Ctrl+, as a toggle rather than stacking a second overlay
+- Disable spellcheck and autocorrect in settings search and filter inputs
+- Convert UI messages to model messages for background task streams, which previously threw AI_InvalidPromptError on every invocation
+- Keep open todos intact when a turn stops abnormally after producing text or tool results, and report the real stream error in the stop toast
+- Report how far a stream got before an unexpected abort, distinguishing a never-delivered fetch from a mid-stream cut
+- Apply terminal workflow status before cleanup, so a failing cleanup can no longer strand the composer in running
+- Keep premium-gated settings unreadable on Windows/WebView2 by making the overlay scrim self-sufficient instead of relying on backdrop-filter
+
+---
+
 ## [1.7.2] - 2026-09-24
 
 ### Added
