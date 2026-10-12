@@ -2,6 +2,29 @@
 
 ---
 
+## [1.8.0] - 2026-10-12
+
+### Added
+- Add Clef Premium skill decisions, routing eligible automatic selections through a Kora-authenticated Workers AI endpoint with admin-managed No / Clef Flash / Clef scope selectors and no Cloudflare credential shipped in the client
+- Add a turn-level Clef activity event with distinct pending, success, Stop and fallback states, reset at the next turn and never written into provider tool history
+- Add joint complementary skill selection, evaluating up to 64 shortlisted candidates in one upstream request and loading only the relevant, deduplicated instruction bodies
+- Add local metadata shortlisting for large skill catalogs, sending only the shortlisted candidates instead of the whole installed catalog, with explicit no-match and boundary-tie outcomes
+- Add per-profile automatic instruction budgets (Eco 2/2000, Balanced 4/6000, Quality 8/12000 estimated tokens), bounded further by 5% of the model context window and 25% of remaining message headroom
+- Add a shared yellow loaded-skill badge on assistant responses, visually distinct from the purple manual references and from real tool status
+
+### Changed
+- Bound each Clef request to 8000 turn characters, 64 multi-skill candidates (126 in legacy single-choice mode), 400-character descriptions and 120-character names, with a 10 s Desktop / 8 s server deadline and no automatic retry
+- Distinguish an explicit no-skill decision from an uncertain or failed one, so a fallback reason stays visible instead of silently returning to standard loading
+- Negotiate the legacy single-skill response format once when an older server replies invalid_decision, and never retry 503 or uncertain outcomes
+
+### Fixed
+- Keep the close button pinned to the tab edge when long file titles overflow the scrollable tab strip
+- Strip the webview Origin from localhost model discovery, connection tests and provider calls, so local servers enforcing an Origin allow-list accept them
+- Separate manual from model invocation eligibility, so a skill the model is not allowed to run is no longer offered or auto-loaded
+- Stop substituting a different skill when the one explicitly requested is absent, disabled or otherwise unavailable
+
+---
+
 ## [1.7.3] - 2026-10-05
 
 ### Added
