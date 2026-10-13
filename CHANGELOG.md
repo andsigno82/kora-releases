@@ -2,6 +2,30 @@
 
 ---
 
+## [1.8.1] - 2026-10-13
+
+### Added
+- Add Fusion Auto, an opt-in "Auto with Clef" routing mode beside Manual, letting the bounded decision endpoint choose between the lead model and the sidekick on each HTTP turn while manual pairing, per-session routing preference and skill selection stay untouched
+- Run an Auto turn with one guarded sidekick delegation per turn, preserving the sidekick report in the lead context and letting the lead model synthesize the final answer with tools disabled and no replayed delegation
+
+### Changed
+- Make provider catalog refresh a set-diff against the live models.dev feed, keeping enabled flags for surviving models, adding new entries disabled, and never touching manually added models
+- Drop catalog-sourced models that disappeared upstream or are marked deprecated, and report the removed count in refresh stats and toasts instead of reading a removal-only sync as already up to date
+- Preserve the Fusion sidekick report through context preparation instead of overwriting the main synthesis
+- Append explicit final-phase instructions when the lead model synthesizes, so it stops imitating a tool call
+- Route sidekick reasoning through the existing reasoning stream, keeping it a separate durable part instead of collecting fallback thinking text into the report
+
+### Fixed
+- Offer only supported sidekick models in the Fusion picker, disabling the Add Sidekick slot for a bound CLI model while keeping CLI providers selectable in the lead selector
+- Render a neutral choose-sidekick placeholder for a saved legacy CLI pairing, dropping the pinned invalid option and the warning badge
+- Replace a Fusion pairing with one atomic binding that preserves the routing preference and the sidekick context, and report an actionable unsupported-sidekick outcome instead of a generic unavailable-pairing failure
+- Fall back to the standard Fusion path with no delegation when the decision endpoint is unavailable, the receipt is stale or the turn was stopped
+- Restore the sidebar autofit from measured chat panel space instead of the composer width cap, so the expand button and automatic restore work again in fullscreen
+- Limit the sidebar expand override to the current viewport, so window resizes resume autofit and a manually collapsed preference is preserved
+- Show the skill and Fusion decision cards stacked on the same turn instead of one hiding the other
+
+---
+
 ## [1.8.0] - 2026-10-12
 
 ### Added
