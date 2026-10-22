@@ -2,6 +2,18 @@
 
 ---
 
+## [1.8.2] - 2026-10-22
+
+### Changed
+- Let the diff renderer own the side-by-side decision, so compact tool chips always stack input and output instead of measuring their own container width
+- Register the per-turn delegate tool in the keyed tool context and extend the coverage test to fail when any tool declaring a context schema is missing
+
+### Fixed
+- Close the window on quit by bounding the workspace flush at three seconds and continuing when the flush fails, instead of staying open on an error or a hung save
+- Fall back to a forced application exit when window destruction is denied, and grant the window destroy permission the close path needs
+
+---
+
 ## [1.8.1] - 2026-10-13
 
 ### Added
