@@ -2,6 +2,21 @@
 
 ---
 
+## [1.8.3] - 2026-10-25
+
+### Added
+- Vet each Auto-mode delegate call through Clef instead of routing the whole turn up front, so the turn always starts on the lead model and the sidekick is reached only on approval
+- Stream the sidekick as a live speaker message from its own activity store, with the overlay rendering local-only progress and the chat committing the final entry
+
+### Changed
+- Cap asking tools to one pending card per session, auto-resolving a second ask, confirmation or plan as superseded instead of stacking near-duplicate cards
+- Remove whole-turn Auto routing now that every delegation is vetted individually, dropping the separate auto-run and fusion synthesis path
+
+### Fixed
+- Exempt blocking delegations from the stall watchdog so a long sidekick hand-off is not mistaken for a stalled turn
+
+---
+
 ## [1.8.2] - 2026-10-22
 
 ### Changed
