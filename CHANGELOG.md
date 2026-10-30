@@ -2,6 +2,13 @@
 
 ---
 
+## [1.8.4] - 2026-10-30
+
+### Fixed
+- Fall back to a direct request whenever the proxy health check does not answer, never resend a proxied request that failed before any response, and resend a proxy-produced 404 that was never forwarded, so an older toonarrow without the /_via/ route no longer stops the chat
+
+---
+
 ## [1.8.3] - 2026-10-25
 
 ### Added
