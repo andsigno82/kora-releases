@@ -2,6 +2,21 @@
 
 ---
 
+## [1.8.6] - 2026-11-01
+
+### Changed
+- Classify the Flash exhausted-allowance stream error as kora-quota-exhausted and render it with the window, € range, reopening time and wallet-cycle hint instead of the raw provider frame, without inventing windows or euros when the payload is partial
+
+---
+
+## [1.8.5] - 2026-10-31
+
+### Added
+- Show a working indicator above the composer during active turns, with a shimmering label and a live elapsed timer anchored to the turn start so the clock survives panel remounts on sessions running in background
+- Offer eight selectable indicator glyphs (arc, spokes, orbit, pinwheel, sweep, track, flip, dots) shared between the composer and the settings preview
+
+---
+
 ## [1.8.4] - 2026-10-30
 
 ### Fixed
