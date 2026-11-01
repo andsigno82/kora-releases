@@ -2,6 +2,22 @@
 
 ---
 
+## [1.9.0] - 2026-11-01
+
+### Added
+- Export any generated card to a standalone HTML file with inlined app stylesheets and theme classes from a button rendered below the card
+
+### Changed
+- Render backtick inline code with the per-theme accent hue (tinted background + accent text) instead of flat grey
+
+### Fixed
+- Reject Select/RadioGroup specs with fewer than two concrete options so the model retries instead of rendering a placeholder control, and default generated buttons to w-fit
+- Synthesize a Text child from container content props and lift inline child objects into the elements map so generated cards no longer render empty sections
+- Strip the typography plugin's literal backtick pseudo-elements on inline code so they no longer show as stray marks on the accent pill
+- Publish Windows installer signatures and update manifests from the release job so the in-app updater works on Windows
+
+---
+
 ## [1.8.6] - 2026-11-01
 
 ### Changed
