@@ -2,6 +2,48 @@
 
 ---
 
+## [1.10.2] - 2026-11-11
+
+### Changed
+- Drop the sidebar streaming footer bar and the chat-driven Running/Ready badges; TurnWorkingIndicator already covers turn activity
+- Remove the plan-mode autoswitch guardrail: a destructive tool call without an approved plan falls back to the standard Allow/Cancel confirmation
+- Skip dirty or 413-skipped sessions on sync pull without advancing the checkpoint, consistent with the tombstone branch
+
+### Fixed
+- Implement the move_file/copy_file/copy_directory/get_system_info commands the frontend already invoked (symlink destinations rejected, create_new semantics)
+- Quarantine corrupt workspace snapshots as <stem>.corrupt-<ms>.json and surface them through a boot toast instead of failing the save
+- Map non-verdict Kora key responses to unknown and show a 403 Account blocked as a blocked state rather than an invalid key
+- Notify only running tasks on Telegram restart and await the previous task before starting the new one
+
+---
+
+## [1.10.1] - 2026-11-10
+
+### Added
+- Sync sessions desktop↔web over a WebCrypto port of the sync crypto (PBKDF2-SHA512-600k + AES-256-GCM + gzip, KAT-verified) and a /sync client with desktop-parity checkpoint and ownership semantics; the web sidebar groups sessions by origin device and renders foreign ones read-only
+- Surface web-born sessions on desktop inside an immutable Cloud Chat project (cloud icon; no rename, delete, new session, folder ops or drag in/out) with close-only semantics: closed ids persist, pulls skip them, and reopening fetches the freshest blob on demand
+- Offer Flash plus every pro model advertised by /api/pricing in the web model selector, persisted on the session and synced back to desktop
+- Add Mode (Ask/Plan/Debug/Build) and Optimization (Auto/Eco/Balanced/Quality) dropdowns on web that steer the system prompt and history window and round-trip to the desktop session file
+- Apply synced session header rules to web inference calls with desktop-parity {{uuid4}}/{{session_id}} expansion and persisted uuid4 values
+- Show the app version in the Windows NSIS installer window title
+- Offer remember-on-this-browser for the web sync passphrase so sync stays on across reloads, and show real sync stages (Registering device, Pushing n/m, Pulling) on the setup buttons
+
+### Changed
+- Regroup the web sidebar under a per-device left rail and drop per-row cloud icons; the recovery phrase now persists by default with Disconnect as the escape hatch
+- Hide the desktop turn-marker rail on web where it rendered as an unreadable tick column
+
+### Fixed
+- Probe CLI providers strictly on Windows (exit 0 required, not just != 9009) and drive the Settings availability dot from the real probe, eliminating ghost providers from leftover .cmd shims
+- Render tooltips as dark popovers () instead of inverted near-white pills on dark themes
+- Fix sync setup/join dead ends: run sync_now inline so the device registers, clear the manual-off flag so re-setup completes after sync was disabled, and notify the app hook so the indicator and config pushes re-enable
+- Seed the config blob on an empty server when the device holds configured providers, fixing the fresh-desktop/empty-server deadlock that left BYOK invisible on web
+- Bound web sync fetches (pull 3 min, others 30 s) so a hung request no longer leaves syncing=true forever
+- Keep session deletion desktop-only on web (delete affordance removed, stale tombstone queue purged) and re-prompt the passphrase when every pulled blob fails to decrypt instead of bricking sync
+- Advance pull checkpoints only on successful apply so a failed decrypt retries instead of tombstoning the session on every future pull
+- Emit no-eligible-skills when a Clef mode shortlist is empty so older servers stop 400-retrying a contract they cannot answer, and drop a duplicated description key that broke the production tsc build
+
+---
+
 ## [1.9.0] - 2026-11-01
 
 ### Added
