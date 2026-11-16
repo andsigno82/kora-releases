@@ -2,6 +2,26 @@
 
 ---
 
+## [1.10.3] - 2026-11-16
+
+### Added
+- Per-model "Supports images" override in provider settings, keyed by model ID and winning over provider capability detection
+- Chronological history media budget (8 MiB trigger → 5 MiB target, 100→80 items) replacing dropped images with an [Image omitted] placeholder, so the cut only moves at trigger crossings and prompt caches stay stable
+- Three-state CLI provider status in Settings (ready / unauthenticated / missing) driven by concurrent install and auth probes (--version exit 0, claude auth status, devin auth status) refreshed on every Settings open, with the login command surfaced on amber; OpenCode reports ready without auth
+- Composer banner warning when Devin image support is still unknown, pointing at the per-model override instead of failing the turn
+
+### Changed
+- Detect git rebase/merge state by resolving git rev-parse --git-path first and testing the directory in a second command, since $(...) is rejected by execute_command
+- Rename files in the tree through the move_file IPC instead of mv
+
+### Fixed
+- Match the Devin "Check Auth Status" regex correctly so "Not logged in." no longer reads as authenticated
+- Close the PowerShell quoting breakout in the git client (x';calc;') by moving to the shared quoter
+- Strip images on Devin turns with unknown capability with a warning instead of failing hard, with the per-model override able to force them
+- Keep image attachment handlers current through a turn ref so file-pick and drop see the live model, provider and turn budget instead of stale closures
+
+---
+
 ## [1.10.2] - 2026-11-11
 
 ### Changed
